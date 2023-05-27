@@ -84,7 +84,7 @@ func (c *Client) stamgr(ctx context.Context, site, cmd string, data map[string]i
 		Data []User `json:"data"`
 	}
 
-	err := c.do(ctx, "POST", fmt.Sprintf("s/%s/cmd/stamgr", site), reqBody, &respBody)
+	err := c.doWithoutMutex(ctx, "POST", fmt.Sprintf("s/%s/cmd/stamgr", site), reqBody, &respBody)
 	if err != nil {
 		return nil, err
 	}

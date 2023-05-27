@@ -195,6 +195,10 @@ func (c *Client) do(ctx context.Context, method, relativeURL string, reqBody int
 	c.Lock()
 	defer c.Unlock()
 
+	return c.doWithoutMutex(ctx, method, relativeURL, reqBody, respBody)
+}
+
+func (c *Client) doWithoutMutex(ctx context.Context, method, relativeURL string, reqBody interface{}, respBody interface{}) error {
 	var (
 		reqReader io.Reader
 		err       error
